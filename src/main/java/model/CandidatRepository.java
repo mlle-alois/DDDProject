@@ -11,7 +11,7 @@ public interface CandidatRepository {
 
     Candidat findById(CandidatId id);
 
-    void deleteById();
+    void deleteById(CandidatId id);
 
 
 }

@@ -2,7 +2,7 @@ package model;
 
 public class Candidat {
 
-    private final CandidatId id;
+    private  CandidatId id;
     private final String cv;
     private final String lettreMotivation;
     private final String nom;
