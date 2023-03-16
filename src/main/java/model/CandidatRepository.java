@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface CandidatRepository {
 
-    CandidatId nextId();
+    EntityId nextId();
     Candidat save(String cv, String lettreMotivation, String nom, String prenom);
 
     List<Candidat> findAll();
 
-    Candidat findById(CandidatId id);
+    Candidat findById(EntityId id);
 
-    void deleteById(CandidatId id);
+    void deleteById(EntityId id);
 
-
+    void updateCandidat(Candidat candidat);
 }

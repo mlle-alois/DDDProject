@@ -1,7 +1,7 @@
 package infrastructure;
 
 import model.Candidat;
-import model.CandidatId;
+import model.EntityId;
 import model.CandidatRepository;
 
 import java.util.HashMap;
@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 public class CandidatsInMemory implements CandidatRepository {
     private final AtomicInteger count = new AtomicInteger(0);
-    HashMap<CandidatId, Candidat> candidats = new HashMap<>();
+    HashMap<EntityId, Candidat> candidats = new HashMap<>();
 
     @Override
-    public CandidatId nextId() {
-        return CandidatId.of(count.incrementAndGet());
+    public EntityId nextId() {
+        return EntityId.of(count.incrementAndGet());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CandidatsInMemory implements CandidatRepository {
     }
 
     @Override
-    public Candidat findById(CandidatId id) {
+    public Candidat findById(EntityId id) {
         final Candidat candidat = candidats.get(id);
         if (candidat == null) {
             throw new RuntimeException("No Account for " + id.getValue());
@@ -40,9 +40,13 @@ public class CandidatsInMemory implements CandidatRepository {
     }
 
     @Override
-    public void deleteById(CandidatId id) {
+    public void deleteById(EntityId id) {
         candidats.remove(id);
     }
 
+    @Override
+    public void updateCandidat(Candidat candidat) {
+        candidats.put(candidat.getId(), candidat);
+    }
 
 }

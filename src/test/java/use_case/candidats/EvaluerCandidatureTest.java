@@ -1,4 +1,4 @@
-package use_case.candidature;
+package use_case.candidats;
 
 public class EvaluerCandidatureTest {
 }

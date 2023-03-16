@@ -2,13 +2,13 @@ package model;
 
 import java.util.Objects;
 
-public class CandidatId {
+public class EntityId {
     private final int value;
 
-    private CandidatId(int valueId){this.value = valueId;}
+    private EntityId(int valueId){this.value = valueId;}
 
 
-    public static CandidatId of(int value){return new CandidatId(value);}
+    public static EntityId of(int value){return new EntityId(value);}
 
     public int getValue(){return value;}
 
@@ -17,7 +17,7 @@ public class CandidatId {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CandidatId that = (CandidatId) o;
+        EntityId that = (EntityId) o;
         return value == that.value;
     }
 
