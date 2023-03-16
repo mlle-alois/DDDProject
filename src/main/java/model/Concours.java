@@ -25,7 +25,8 @@ public class Concours {
     private final int penalite;
 
     private int note;
-    public Concours(Candidat candidat, String nom, String sujetConcours, Date dateDebutConcours, Date dateRenduLimitConcours) {
+    public Concours(EntityId id, Candidat candidat, String nom, String sujetConcours, Date dateDebutConcours, Date dateRenduLimitConcours) {
+        this.id = id;
         this.candidat = candidat;
         this.nom = nom;
         this.sujetConcours = sujetConcours;

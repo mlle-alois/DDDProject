@@ -4,6 +4,7 @@ import model.Candidat;
 import model.EntityId;
 import model.CandidatRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,6 +14,10 @@ public class CandidatsInMemory implements CandidatRepository {
     private final AtomicInteger count = new AtomicInteger(0);
     HashMap<EntityId, Candidat> candidats = new HashMap<>();
 
+    @Override
+    public List<Candidat> candidatsList() {
+        return new ArrayList<>(candidats.values());
+    }
     @Override
     public EntityId nextId() {
         return EntityId.of(count.incrementAndGet());

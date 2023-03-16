@@ -1,7 +1,6 @@
 package model;
 
 import model.enums.StatusCandidatEnum;
-import use_case.candidats.EvaluerCandidat;
 
 public class Candidat {
 
@@ -12,6 +11,8 @@ public class Candidat {
     private final String prenom;
     private final int penalite;
     private StatusCandidatEnum statusCandidat;
+
+    private Concours concours;
 
     public Candidat(EntityId id, String cv, String lettreMotivation, String nom, String prenom) {
         this.id = id;
@@ -50,6 +51,18 @@ public class Candidat {
 
     public void setStatusCandidate(StatusCandidatEnum statusCandidat) {
         this.statusCandidat = statusCandidat;
+    }
+
+    public void setConcours(Concours concours) {
+    	this.concours = concours;
+    }
+
+    public Concours getConcours() {
+    	return this.concours;
+    }
+
+    public void removeConcours() {
+    	this.concours = null;
     }
 /*
     public void evaluer(int note, Concours concours) {

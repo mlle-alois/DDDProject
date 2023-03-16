@@ -21,12 +21,12 @@ public class ConcoursInMemory implements ConcoursRepository {
 
     @Override
     public Concours getByCandidatId(EntityId entityId) {
-        return concours.values().stream().filter(c -> c.getCandidat().getId().equals(entityId)).findFirst().orElse(null);
+        return concours.values().stream().filter(c -> c.getCandidat().getId().getValue() == entityId.getValue()).findFirst().orElse(null);
     }
 
     @Override
     public Concours save(Candidat candidat, String nom, String sujetConcours, Date dateDebutConcours, Date dateRenduLimitConcours) {
-        Concours concours = new Concours(candidat, nom, sujetConcours, dateDebutConcours, dateRenduLimitConcours);
+        Concours concours = new Concours(nextId(), candidat, nom, sujetConcours, dateDebutConcours, dateRenduLimitConcours);
         this.concours.put(concours.getId(), concours);
         return concours;
     }

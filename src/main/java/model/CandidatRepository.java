@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public interface CandidatRepository {
 
     EntityId nextId();
@@ -10,4 +12,6 @@ public interface CandidatRepository {
     void updateCandidat(Candidat candidat);
 
     void deleteCandidat(Candidat candidat);
+
+    List<Candidat> candidatsList();
 }
