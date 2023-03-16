@@ -11,9 +11,10 @@ public class Candidat {
     private final String nom;
     private final String prenom;
     private final int penalite;
-    private Enum<StatusCandidatEnum> statusCandidat;
+    private StatusCandidatEnum statusCandidat;
 
-    public Candidat(String cv, String lettreMotivation, String nom, String prenom) {
+    public Candidat(EntityId id, String cv, String lettreMotivation, String nom, String prenom) {
+        this.id = id;
         this.cv = cv;
         this.lettreMotivation = lettreMotivation;
         this.nom = nom;
@@ -43,11 +44,11 @@ public class Candidat {
         return prenom;
     }
 
-    public Enum<StatusCandidatEnum> getStatusCandidate() {
+    public StatusCandidatEnum getStatusCandidate() {
         return statusCandidat;
     }
 
-    public void setStatusCandidate(Enum<StatusCandidatEnum> statusCandidat) {
+    public void setStatusCandidate(StatusCandidatEnum statusCandidat) {
         this.statusCandidat = statusCandidat;
     }
 /*

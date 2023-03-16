@@ -20,14 +20,10 @@ public class CandidatsInMemory implements CandidatRepository {
 
     @Override
     public Candidat save(String cv, String lettreMotivation, String nom, String prenom) {
-        Candidat candidat = new Candidat(cv, lettreMotivation, nom, prenom, penalité);
+
+        Candidat candidat = new Candidat(nextId(), cv, lettreMotivation, nom, prenom);
         candidats.put(candidat.getId(), candidat);
         return candidat;
-    }
-
-    @Override
-    public List<Candidat> findAll() {
-        return candidats.values().stream().collect(Collectors.toList());
     }
 
     @Override
@@ -37,11 +33,6 @@ public class CandidatsInMemory implements CandidatRepository {
             throw new RuntimeException("No Account for " + id.getValue());
         }
         return candidat;
-    }
-
-    @Override
-    public void deleteById(EntityId id) {
-        candidats.remove(id);
     }
 
     @Override

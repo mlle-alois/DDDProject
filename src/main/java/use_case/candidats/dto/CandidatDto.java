@@ -10,9 +10,9 @@ public class CandidatDto {
     private final String nom;
     private final String prenom;
 
-    private final Enum<StatusCandidatEnum> statusCandidat;
+    private final StatusCandidatEnum statusCandidat;
 
-    public CandidatDto(EntityId id, String cv, String lettreMotivation, String nom, String prenom, Enum<StatusCandidatEnum> statusCandidat) {
+    public CandidatDto(EntityId id, String cv, String lettreMotivation, String nom, String prenom, StatusCandidatEnum statusCandidat) {
         this.id = id;
         this.cv = cv;
         this.lettreMotivation = lettreMotivation;
@@ -41,7 +41,7 @@ public class CandidatDto {
         return prenom;
     }
 
-    public Enum<StatusCandidatEnum> getStatusCandidat() {
+    public StatusCandidatEnum getStatusCandidat() {
         return statusCandidat;
     }
 }
