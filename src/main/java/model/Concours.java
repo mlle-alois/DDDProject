@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.StatusCandidatEnum;
+
 import java.util.Date;
 
 public class Concours {
@@ -19,6 +21,9 @@ public class Concours {
 
     private final int notePourValider;
 
+
+    private final int penalite;
+
     private int note;
     public Concours(Candidat candidat, String nom, String sujetConcours, Date dateDebutConcours, Date dateRenduLimitConcours) {
         this.candidat = candidat;
@@ -28,6 +33,7 @@ public class Concours {
         this.dateRenduLimitConcours = dateRenduLimitConcours;
         this.note = -1;
         this.notePourValider = 10;
+        this.penalite = -2;
     }
 
     public EntityId getId() {
@@ -93,5 +99,25 @@ public class Concours {
 
     public int getNotePourValider() {
         return notePourValider;
+    }
+
+    public StatusCandidatEnum evalueCandidatStatus(NoteConcours noteConcours) {
+        if (noteConcours.getNote() >= getNotePourValider()) {
+            return StatusCandidatEnum.ACCEPTER;
+        } else {
+            return StatusCandidatEnum.REFUSER;
+        }
+    }
+
+    public StatusCandidatEnum evaluer(int note){
+        NoteConcours noteConcours = new NoteConcours(note);
+
+        if (getDateRenduConcours() > getDateRenduLimitConcours()) {
+            noteConcours = new NoteConcours( noteConcours.getNote() + this.penalite);
+        }
+
+        StatusCandidatEnum candidatStatut = evalueCandidatStatus(noteConcours);
+        return candidatStatut;
+
     }
 }

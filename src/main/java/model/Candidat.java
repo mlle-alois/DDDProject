@@ -10,7 +10,6 @@ public class Candidat {
     private final String lettreMotivation;
     private final String nom;
     private final String prenom;
-
     private final int penalite;
     private Enum<StatusCandidatEnum> statusCandidat;
 
@@ -51,18 +50,16 @@ public class Candidat {
     public void setStatusCandidate(Enum<StatusCandidatEnum> statusCandidat) {
         this.statusCandidat = statusCandidat;
     }
-
-    public void evaluer(int note, Concours concours, EvaluerCandidat evaluerCandidat) {
+/*
+    public void evaluer(int note, Concours concours) {
         NoteConcours noteConcours = new NoteConcours(note);
 
         if (concours.getDateRenduConcours() > concours.getDateRenduLimitConcours()) {
             noteConcours = new NoteConcours( noteConcours.getNote() + this.penalite);
         }
 
-        if (noteConcours.getNote() >= concours.getNotePourValider()) {
-            setStatusCandidate(StatusCandidatEnum.ACCEPTER);
-        } else {
-            setStatusCandidate(StatusCandidatEnum.REFUSER);
-        }
-    }
+        StatusCandidatEnum candidatStatut = concours.evalueCandidatStatus(noteConcours);
+        setStatusCandidate(candidatStatut);
+
+    }*/
 }

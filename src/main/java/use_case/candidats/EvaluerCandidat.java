@@ -1,6 +1,7 @@
 package use_case.candidats;
 
 import model.*;
+import model.enums.StatusCandidatEnum;
 import use_case.candidats.dto.CandidatDto;
 
 public class EvaluerCandidat {
@@ -21,7 +22,9 @@ public class EvaluerCandidat {
             Candidat candidat = this.candidatRepository.findById(EntityId.of(candidatId));
             Concours concours = this.concoursRepository.getByCandidatId(candidat.getId());
 
-            candidat.evaluer(note, concours, this);
+            StatusCandidatEnum resultat = concours.evaluer(note);
+            candidat.setStatusCandidate(resultat);
+
             this.candidatRepository.updateCandidat(candidat);
             this.concoursRepository.updateConcours(concours);
             return new CandidatDto(
