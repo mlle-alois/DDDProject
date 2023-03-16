@@ -66,8 +66,8 @@ public class Concours {
         this.dateDebutConcours = dateDebutConcours;
     }
 
-    public Date getDateRenduLimitConcours() {
-        return dateRenduLimitConcours;
+    public long getDateRenduLimitConcours() {
+        return dateRenduLimitConcours.getTime();
     }
 
     public void setDateRenduLimitConcours(Date dateRenduLimitConcours) {
@@ -83,8 +83,8 @@ public class Concours {
         this.note = Math.max(note, 0);
     }
 
-    public Date getDateRenduConcours() {
-        return dateRenduConcours;
+    public long getDateRenduConcours() {
+        return dateRenduConcours.getTime();
     }
 
     public void setDateRenduConcours(Date dateRenduConcours) {

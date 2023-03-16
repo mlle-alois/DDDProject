@@ -55,7 +55,7 @@ public class Candidat {
     public void evaluer(int note, Concours concours, EvaluerCandidat evaluerCandidat) {
         NoteConcours noteConcours = new NoteConcours(note);
 
-        if (concours.getDateRenduConcours().getTime() > concours.getDateRenduLimitConcours().getTime()) {
+        if (concours.getDateRenduConcours() > concours.getDateRenduLimitConcours()) {
             noteConcours = new NoteConcours( noteConcours.getNote() + this.penalite);
         }
 
