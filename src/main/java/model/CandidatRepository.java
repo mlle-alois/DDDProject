@@ -8,4 +8,6 @@ public interface CandidatRepository {
     Candidat findById(EntityId id);
 
     void updateCandidat(Candidat candidat);
+
+    void deleteCandidat(Candidat candidat);
 }

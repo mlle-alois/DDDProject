@@ -40,4 +40,9 @@ public class CandidatsInMemory implements CandidatRepository {
         candidats.put(candidat.getId(), candidat);
     }
 
+    @Override
+    public void deleteCandidat(Candidat candidat) {
+        candidats.remove(candidat.getId());
+    }
+
 }
