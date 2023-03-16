@@ -4,6 +4,7 @@ import infrastructure.CandidatsInMemory;
 import infrastructure.ConcoursInMemory;
 import model.*;
 import model.enums.StatusCandidatEnum;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,6 +66,14 @@ public class EvaluerCandidatTest {
                 Date.from(LocalDateTime.now().plusDays(1).toInstant(java.time.ZoneOffset.UTC))));
         candidatList.get(4).setConcours(concoursList.get(4));
         candidatRepository.updateCandidat(candidatList.get(4));
+
+        concoursList.add(concoursRepository.save(candidatList.get(5), "nom6", "refuser",
+                Date.from(LocalDateTime.of(2020, 1, 1, 0, 0).toInstant(java.time.ZoneOffset.UTC)),
+                Date.from(LocalDateTime.of(2020, 1, 2, 0, 0).toInstant(java.time.ZoneOffset.UTC))));
+        concoursList.get(5).setDateRenduConcours(Date.from(LocalDateTime.of(2020, 1, 1, 0, 10).toInstant(java.time.ZoneOffset.UTC)));
+        candidatList.get(5).setConcours(concoursList.get(5));
+        candidatRepository.updateCandidat(candidatList.get(5));
+
         this.evaluerCandidat = new EvaluerCandidat(candidatRepository, concoursRepository);
     }
 
@@ -77,6 +86,45 @@ public class EvaluerCandidatTest {
         CandidatDto candidat = evaluerCandidat(1, 11);
         assert candidat.getStatusCandidat() == StatusCandidatEnum.ACCEPTER;
     }
+
+    @Test
+    void evaluer_candidat_penalite() {
+        CandidatDto candidat = evaluerCandidat(2, 12);
+        assert candidat.getStatusCandidat() == StatusCandidatEnum.ACCEPTER_AVEC_PENALITE;
+    }
+
+    @Test
+    void evaluer_candidat_candidat_nexiste_plus() {
+        assert evaluerCandidat(3, 12) == null;
+    }
+
+    @Test
+    void evaluer_candidat_date_rendu_final_pas_encore_commencer() {
+        assert evaluerCandidat(4, 12) == null;
+    }
+
+    @Test
+    void evaluer_candidat_peut_noter_candidat_sans_rendu_si_date_rendu_finit() {
+        CandidatDto candidat = evaluerCandidat(5, 0);
+        assert candidat.getStatusCandidat() == StatusCandidatEnum.REFUSER;
+    }
+
+    @Test
+    void evaluer_candidat_refuser() {
+        CandidatDto candidat = evaluerCandidat(6, 0);
+        assert candidat.getStatusCandidat() == StatusCandidatEnum.REFUSER;
+    }
+
+    @Test
+    void evaluer_note_inferieur_0() {
+        assert evaluerCandidat(1, -1) == null;
+    }
+
+    @Test
+    void evaluer_note_superieur_20() {
+        assert evaluerCandidat(1, 21) == null;
+    }
+
 
     // TODO
     // id du candidat ne correspond à rien

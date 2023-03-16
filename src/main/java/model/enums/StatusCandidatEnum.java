@@ -5,5 +5,6 @@ import model.Candidat;
 public enum StatusCandidatEnum {
     EN_ATTENTE,
     ACCEPTER,
-    REFUSER;
+    REFUSER,
+    ACCEPTER_AVEC_PENALITE;
 }

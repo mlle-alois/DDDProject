@@ -102,8 +102,11 @@ public class Concours {
         return notePourValider;
     }
 
-    public StatusCandidatEnum evalueCandidatStatus(NoteConcours noteConcours) {
+    public StatusCandidatEnum evalueCandidatStatus(NoteConcours noteConcours, boolean isPenalite) {
         if (noteConcours.getNote() >= getNotePourValider()) {
+            if (isPenalite) {
+                return StatusCandidatEnum.ACCEPTER_AVEC_PENALITE;
+            }
             return StatusCandidatEnum.ACCEPTER;
         } else {
             return StatusCandidatEnum.REFUSER;
@@ -115,10 +118,11 @@ public class Concours {
 
         if (getDateRenduConcours() > getDateRenduLimitConcours()) {
             noteConcours = new NoteConcours( noteConcours.getNote() + this.penalite);
+            StatusCandidatEnum candidatStatut = evalueCandidatStatus(noteConcours, true);
+            return candidatStatut;
         }
 
-        StatusCandidatEnum candidatStatut = evalueCandidatStatus(noteConcours);
+        StatusCandidatEnum candidatStatut = evalueCandidatStatus(noteConcours, false);
         return candidatStatut;
-
     }
 }
