@@ -1,6 +1,6 @@
 package CustomException;
 
-public class NoteNegatifException extends Exception{
+public class NoteNegatifException extends RuntimeException{
     public NoteNegatifException(String message) {
         super(message);
     }

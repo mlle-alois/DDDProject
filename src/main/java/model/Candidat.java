@@ -1,6 +1,7 @@
 package model;
 
 import model.enums.StatusCandidatEnum;
+import use_case.candidats.EvaluerCandidat;
 
 public class Candidat {
 
@@ -10,6 +11,7 @@ public class Candidat {
     private final String nom;
     private final String prenom;
 
+    private final int penalite;
     private Enum<StatusCandidatEnum> statusCandidat;
 
     public Candidat(String cv, String lettreMotivation, String nom, String prenom) {
@@ -18,6 +20,7 @@ public class Candidat {
         this.nom = nom;
         this.prenom = prenom;
         this.statusCandidat = StatusCandidatEnum.EN_ATTENTE;
+        this.penalite = -2;
     }
 
 
@@ -47,5 +50,19 @@ public class Candidat {
 
     public void setStatusCandidate(Enum<StatusCandidatEnum> statusCandidat) {
         this.statusCandidat = statusCandidat;
+    }
+
+    public void evaluer(int note, Concours concours, EvaluerCandidat evaluerCandidat) {
+        NoteConcours noteConcours = new NoteConcours(note);
+
+        if (concours.getDateRenduConcours().getTime() > concours.getDateRenduLimitConcours().getTime()) {
+            noteConcours = new NoteConcours( noteConcours.getNote() + this.penalite);
+        }
+
+        if (noteConcours.getNote() >= concours.getNotePourValider()) {
+            setStatusCandidate(StatusCandidatEnum.ACCEPTER);
+        } else {
+            setStatusCandidate(StatusCandidatEnum.REFUSER);
+        }
     }
 }

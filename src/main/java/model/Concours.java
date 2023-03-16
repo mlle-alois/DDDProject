@@ -17,6 +17,8 @@ public class Concours {
 
     private Date dateRenduLimitConcours;
 
+    private final int notePourValider;
+
     private int note;
     public Concours(Candidat candidat, String nom, String sujetConcours, Date dateDebutConcours, Date dateRenduLimitConcours) {
         this.candidat = candidat;
@@ -25,6 +27,7 @@ public class Concours {
         this.dateDebutConcours = dateDebutConcours;
         this.dateRenduLimitConcours = dateRenduLimitConcours;
         this.note = -1;
+        this.notePourValider = 10;
     }
 
     public EntityId getId() {
@@ -86,5 +89,9 @@ public class Concours {
 
     public void setDateRenduConcours(Date dateRenduConcours) {
         this.dateRenduConcours = dateRenduConcours;
+    }
+
+    public int getNotePourValider() {
+        return notePourValider;
     }
 }
