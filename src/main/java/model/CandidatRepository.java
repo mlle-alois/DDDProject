@@ -5,6 +5,7 @@ import java.util.List;
 public interface CandidatRepository {
 
     EntityId nextId();
+
     Candidat save(String cv, String lettreMotivation, String nom, String prenom);
 
     Candidat findById(EntityId id);
@@ -13,5 +14,4 @@ public interface CandidatRepository {
 
     void deleteCandidat(Candidat candidat);
 
-    List<Candidat> candidatsList();
 }

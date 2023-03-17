@@ -10,14 +10,14 @@ public class Concours {
 
     private Candidat candidat;
 
-    private String nom;
+    private final String nom;
 
-    private String sujetConcours;
+    private final String sujetConcours;
 
     private Date dateRenduConcours;
-    private Date dateDebutConcours;
+    private final Date dateDebutConcours;
 
-    private Date dateRenduLimitConcours;
+    private final Date dateRenduLimitConcours;
 
     private final int notePourValider;
 
@@ -25,6 +25,7 @@ public class Concours {
     private final int penalite;
 
     private int note;
+
 
     public Concours(EntityId id, Candidat candidat, String nom, String sujetConcours, Date dateDebutConcours, Date dateRenduLimitConcours) {
         this.id = id;
@@ -46,49 +47,8 @@ public class Concours {
         return candidat;
     }
 
-    public void setCandidat(Candidat candidat) {
-        this.candidat = candidat;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getSujetConcours() {
-        return sujetConcours;
-    }
-
-    public void setSujetConcours(String sujetConcours) {
-        this.sujetConcours = sujetConcours;
-    }
-
-    public Date getDateDebutConcours() {
-        return dateDebutConcours;
-    }
-
-    public void setDateDebutConcours(Date dateDebutConcours) {
-        this.dateDebutConcours = dateDebutConcours;
-    }
-
     public long getDateRenduLimitConcours() {
         return dateRenduLimitConcours.getTime();
-    }
-
-    public void setDateRenduLimitConcours(Date dateRenduLimitConcours) {
-        this.dateRenduLimitConcours = dateRenduLimitConcours;
-    }
-
-    public int getNote() {
-        return note;
-    }
-
-    public void setNote(int note) {
-
-        this.note = Math.max(note, 0);
     }
 
     public long getDateRenduConcours() {
@@ -118,15 +78,20 @@ public class Concours {
         return new Date().getTime() < getDateRenduLimitConcours();
     }
 
+    private boolean evaluationEstTermineeSansRendu() {
+        return dateRenduConcours == null;
+    }
     public StatusCandidatEnum evaluer(int note) {
         NoteConcours noteConcours = new NoteConcours(note);
 
         if (evaluationNaPasCommence()) {
             return StatusCandidatEnum.EN_ATTENTE;
         }
-        if (dateRenduConcours == null) {
+
+        if (evaluationEstTermineeSansRendu()) {
             return StatusCandidatEnum.REFUSER;
         }
+
         if (getDateRenduConcours() > getDateRenduLimitConcours()) {
             noteConcours = new NoteConcours(noteConcours.getNote() + this.penalite);
             return evalueCandidatStatus(noteConcours, true);

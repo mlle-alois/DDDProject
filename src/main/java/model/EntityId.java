@@ -5,12 +5,18 @@ import java.util.Objects;
 public class EntityId {
     private final int value;
 
-    private EntityId(int valueId){this.value = valueId;}
+    private EntityId(int valueId) {
+        this.value = valueId;
+    }
 
 
-    public static EntityId of(int value){return new EntityId(value);}
+    public static EntityId of(int value) {
+        return new EntityId(value);
+    }
 
-    public int getValue(){return value;}
+    public int getValue() {
+        return value;
+    }
 
 
     @Override

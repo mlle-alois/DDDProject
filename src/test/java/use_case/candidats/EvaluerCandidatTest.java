@@ -18,15 +18,14 @@ import java.util.List;
 
 public class EvaluerCandidatTest {
 
-    private CandidatRepository candidatRepository;
-    private ConcoursRepository concoursRepository;
     private final List<Candidat> candidatList = new ArrayList<>();
     private final List<Concours> concoursList = new ArrayList<>();
     private EvaluerCandidat evaluerCandidat;
+
     @BeforeEach
     public void initialiser() {
-        candidatRepository = new CandidatsInMemory();
-        concoursRepository = new ConcoursInMemory();
+        CandidatRepository candidatRepository = new CandidatsInMemory();
+        ConcoursRepository concoursRepository = new ConcoursInMemory();
 
         candidatList.add(candidatRepository.save("nom1", "prenom1", "cv1", "lm1"));
         candidatList.add(candidatRepository.save("nom2", "prenom2", "cv2", "lm2"));
@@ -76,6 +75,7 @@ public class EvaluerCandidatTest {
         candidatRepository.updateCandidat(candidatList.get(5));
 
         this.evaluerCandidat = new EvaluerCandidat(candidatRepository, concoursRepository);
+
     }
 
     private CandidatDto evaluerCandidat(int candidatId, int note) {

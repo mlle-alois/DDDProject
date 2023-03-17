@@ -9,7 +9,6 @@ public class Candidat {
     private final String lettreMotivation;
     private final String nom;
     private final String prenom;
-    private final int penalite;
     private StatusCandidatEnum statusCandidat;
 
     private Concours concours;
@@ -21,7 +20,6 @@ public class Candidat {
         this.nom = nom;
         this.prenom = prenom;
         this.statusCandidat = StatusCandidatEnum.EN_ATTENTE;
-        this.penalite = -2;
     }
 
 
@@ -54,26 +52,6 @@ public class Candidat {
     }
 
     public void setConcours(Concours concours) {
-    	this.concours = concours;
+        this.concours = concours;
     }
-
-    public Concours getConcours() {
-    	return this.concours;
-    }
-
-    public void removeConcours() {
-    	this.concours = null;
-    }
-/*
-    public void evaluer(int note, Concours concours) {
-        NoteConcours noteConcours = new NoteConcours(note);
-
-        if (concours.getDateRenduConcours() > concours.getDateRenduLimitConcours()) {
-            noteConcours = new NoteConcours( noteConcours.getNote() + this.penalite);
-        }
-
-        StatusCandidatEnum candidatStatut = concours.evalueCandidatStatus(noteConcours);
-        setStatusCandidate(candidatStatut);
-
-    }*/
 }

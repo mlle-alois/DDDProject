@@ -21,26 +21,6 @@ public class CandidatDto {
         this.statusCandidat = statusCandidat;
     }
 
-    public EntityId getId() {
-        return id;
-    }
-
-    public String getCv() {
-        return cv;
-    }
-
-    public String getLettreMotivation() {
-        return lettreMotivation;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
     public StatusCandidatEnum getStatusCandidat() {
         return statusCandidat;
     }
