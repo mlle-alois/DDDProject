@@ -114,10 +114,14 @@ public class Concours {
         }
     }
 
+    private boolean evaluationNaPasCommence() {
+        return new Date().getTime() < getDateRenduLimitConcours();
+    }
+
     public StatusCandidatEnum evaluer(int note) {
         NoteConcours noteConcours = new NoteConcours(note);
 
-        if (new Date().getTime() < getDateRenduLimitConcours()) {
+        if (evaluationNaPasCommence()) {
             return StatusCandidatEnum.EN_ATTENTE;
         }
         if (dateRenduConcours == null) {
