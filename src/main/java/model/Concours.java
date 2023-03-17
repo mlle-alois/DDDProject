@@ -25,6 +25,7 @@ public class Concours {
     private final int penalite;
 
     private int note;
+
     public Concours(EntityId id, Candidat candidat, String nom, String sujetConcours, Date dateDebutConcours, Date dateRenduLimitConcours) {
         this.id = id;
         this.candidat = candidat;
@@ -113,17 +114,17 @@ public class Concours {
         }
     }
 
-    public StatusCandidatEnum evaluer(int note){
+    public StatusCandidatEnum evaluer(int note) {
         NoteConcours noteConcours = new NoteConcours(note);
 
-        if(new Date().getTime() < getDateRenduLimitConcours()){
+        if (new Date().getTime() < getDateRenduLimitConcours()) {
             return StatusCandidatEnum.EN_ATTENTE;
         }
-        if(getDateRenduConcours() == null){
-            return StatusCandidatEnum.EN_ATTENTE;
+        if (dateRenduConcours == null) {
+            return StatusCandidatEnum.REFUSER;
         }
         if (getDateRenduConcours() > getDateRenduLimitConcours()) {
-            noteConcours = new NoteConcours( noteConcours.getNote() + this.penalite);
+            noteConcours = new NoteConcours(noteConcours.getNote() + this.penalite);
             return evalueCandidatStatus(noteConcours, true);
         }
 
