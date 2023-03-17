@@ -30,7 +30,7 @@ public class CandidatsInMemory implements CandidatRepository {
     public Candidat findById(EntityId id) {
         final Candidat candidat = candidats.get(id);
         if (candidat == null) {
-            throw new RuntimeException("No Account for " + id.getValue());
+            throw new RuntimeException("Error: No Account for " + id.getValue());
         }
         return candidat;
     }

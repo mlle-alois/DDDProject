@@ -9,9 +9,9 @@ public class NoteConcours {
 
     public NoteConcours(int note) {
         if (note < 0)
-            throw new NoteNegatifException("La note ne peut être négatif");
+            throw new NoteNegatifException("Error: La note ne peut être négatif");
         if (note > 20)
-            throw new NoteNegatifException("La note ne peut être supérieur à 20");
+            throw new NoteNegatifException("Error: La note ne peut être supérieur à 20");
         this.note = note;
     }
 
