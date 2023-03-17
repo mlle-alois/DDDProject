@@ -2,10 +2,11 @@ package use_case.candidats;
 
 import infrastructure.CandidatsInMemory;
 import infrastructure.ConcoursInMemory;
-import model.*;
+import model.Candidat;
+import model.CandidatRepository;
+import model.Concours;
+import model.ConcoursRepository;
 import model.enums.StatusCandidatEnum;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.candidats.dto.CandidatDto;
@@ -62,8 +63,8 @@ public class EvaluerCandidatTest {
         candidatRepository.updateCandidat(candidatList.get(3));
 
         concoursList.add(concoursRepository.save(candidatList.get(4), "nom5", "peut noter le candidat sans rendu si date de rendu finit",
-                Date.from(LocalDateTime.now().minusDays(2).toInstant(java.time.ZoneOffset.UTC)),
-                Date.from(LocalDateTime.now().plusDays(1).toInstant(java.time.ZoneOffset.UTC))));
+                Date.from(LocalDateTime.now().minusDays(8).toInstant(java.time.ZoneOffset.UTC)),
+                Date.from(LocalDateTime.now().minusDays(4).toInstant(java.time.ZoneOffset.UTC))));
         candidatList.get(4).setConcours(concoursList.get(4));
         candidatRepository.updateCandidat(candidatList.get(4));
 
@@ -100,7 +101,7 @@ public class EvaluerCandidatTest {
 
     @Test
     void evaluer_candidat_date_rendu_final_pas_encore_commencer() {
-        assert evaluerCandidat(4, 12) == null;
+        assert evaluerCandidat(4, 12).getStatusCandidat() == StatusCandidatEnum.EN_ATTENTE;
     }
 
     @Test

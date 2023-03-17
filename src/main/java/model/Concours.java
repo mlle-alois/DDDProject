@@ -116,13 +116,17 @@ public class Concours {
     public StatusCandidatEnum evaluer(int note){
         NoteConcours noteConcours = new NoteConcours(note);
 
+        if(new Date().getTime() < getDateRenduLimitConcours()){
+            return StatusCandidatEnum.EN_ATTENTE;
+        }
+        if(getDateRenduConcours() == null){
+            return StatusCandidatEnum.EN_ATTENTE;
+        }
         if (getDateRenduConcours() > getDateRenduLimitConcours()) {
             noteConcours = new NoteConcours( noteConcours.getNote() + this.penalite);
-            StatusCandidatEnum candidatStatut = evalueCandidatStatus(noteConcours, true);
-            return candidatStatut;
+            return evalueCandidatStatus(noteConcours, true);
         }
 
-        StatusCandidatEnum candidatStatut = evalueCandidatStatus(noteConcours, false);
-        return candidatStatut;
+        return evalueCandidatStatus(noteConcours, false);
     }
 }

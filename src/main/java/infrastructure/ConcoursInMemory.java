@@ -21,7 +21,7 @@ public class ConcoursInMemory implements ConcoursRepository {
 
     @Override
     public Concours getByCandidatId(EntityId entityId) {
-        return concours.values().stream().filter(c -> c.getCandidat().getId().getValue() == entityId.getValue()).findFirst().orElse(null);
+        return concours.values().stream().filter(concours -> concours.getCandidat().getId().getValue() == entityId.getValue()).findFirst().orElse(null);
     }
 
     @Override
